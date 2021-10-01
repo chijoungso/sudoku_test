@@ -1,17 +1,30 @@
 package nl.tensai.game.sudoku.ui;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import nl.tensai.game.sudoku.constants.GameState;
+import nl.tensai.game.sudoku.problem.Coordinates;
+import nl.tensai.game.sudoku.problem.SudokuGame;
 
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
  * Manages the window, and displays a pop up notification when the user completes the puzzle.
  */
-public class UserInterface implements EventHandler<KeyEvent> {
+public class UserInterfaceImpl implements IUserInterface.View, EventHandler<KeyEvent> {
     private final Stage stage;
     private final Group root;
 
@@ -23,7 +36,7 @@ public class UserInterface implements EventHandler<KeyEvent> {
     //The Key (<Key, Value> -> <Coordinates, Integer>) will be the HashCode of a given InputField for ease of lookup
     private HashMap<Coordinates, SudokuTextField> textFieldCoordinates;
 
-    private IUserInterfaceContract.EventListener listener;
+    private IUserInterface.EventListener listener;
 
     //Size of the window
     private static final double WINDOW_Y = 732;
@@ -46,7 +59,7 @@ public class UserInterface implements EventHandler<KeyEvent> {
      *
      * @param stage
      */
-    public UserInterface(Stage stage) {
+    public UserInterfaceImpl(Stage stage) {
         this.stage = stage;
         this.root = new Group();
         this.textFieldCoordinates = new HashMap<>();
@@ -55,7 +68,7 @@ public class UserInterface implements EventHandler<KeyEvent> {
 
 
     @Override
-    public void setListener(IUserInterfaceContract.EventListener listener) {
+    public void setListener(IUserInterface.EventListener listener) {
         this.listener = listener;
     }
 
