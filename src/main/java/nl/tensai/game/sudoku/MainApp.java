@@ -4,11 +4,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import nl.tensai.game.sudoku.logic.SudokuBuildLogic;
 import nl.tensai.game.sudoku.ui.UserInterfaceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class MainApp extends Application {
 
+    private static Logger log = LoggerFactory.getLogger(MainApp.class);
 
     private UserInterfaceImpl uiImpl;
 
@@ -20,7 +23,7 @@ public class MainApp extends Application {
         try {
             SudokuBuildLogic.build(uiImpl);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("Failed to start game.", e);
             throw e;
         }
 
