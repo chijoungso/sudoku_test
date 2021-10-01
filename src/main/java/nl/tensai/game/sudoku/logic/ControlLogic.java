@@ -5,6 +5,8 @@ import nl.tensai.game.sudoku.constants.Messages;
 import nl.tensai.game.sudoku.problem.IStorage;
 import nl.tensai.game.sudoku.problem.SudokuGame;
 import nl.tensai.game.sudoku.ui.IUserInterface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -14,6 +16,8 @@ import java.io.IOException;
  */
 
 public class ControlLogic implements IUserInterface.EventListener {
+
+    private static Logger log = LoggerFactory.getLogger(ControlLogic.class);
 
     private IStorage storage;
     //Remember, this could be the real UserInterfaceImpl, or it could be a test class
@@ -56,7 +60,7 @@ public class ControlLogic implements IUserInterface.EventListener {
             //if game is complete, show dialog
             if (gameData.getGameState() == GameState.COMPLETE) view.showDialog(Messages.GAME_COMPLETE);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.info("Input caused error: ", e);
             view.showError(Messages.ERROR);
         }
     }
