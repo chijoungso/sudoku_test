@@ -13,12 +13,10 @@ public class MainApp extends Application {
 
     private static Logger log = LoggerFactory.getLogger(MainApp.class);
 
-    private UserInterfaceImpl uiImpl;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Get SudokuGame object for a new game
-        uiImpl = new UserInterfaceImpl(primaryStage);
+        UserInterfaceImpl uiImpl = new UserInterfaceImpl(primaryStage);
 
         try {
             SudokuBuildLogic.build(uiImpl);
